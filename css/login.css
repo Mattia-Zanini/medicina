@@ -1,0 +1,51 @@
+body {
+    background-image: url("../assets/svg/loginbg.svg");
+    background-color: #3c64fb;
+    background-repeat: no-repeat;
+    background-size: 101%;
+}
+
+.login-form {
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 20vh;
+    margin-left: 37vw;
+}
+
+.btn-login {
+    height: 6vh !important;
+    background-color: #1d1464;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #3f2bd8;
+    color: white;
+}
+
+.login-text {
+    color: #4a427e;
+    font-weight: bold;
+}
+
+.login-title {
+    margin-left: 1.5vw;
+}
+
+.input-group-text {
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* stretch the background to cover the whole element */
+
+    /* 
+       still inline, but has block features
+       meaning height and width can be set
+    */
+    display: inline-block;
+    border-left: 0;
+    pointer-events: none;
+}
+
+.test-input {
+    border-right: 0;
+}

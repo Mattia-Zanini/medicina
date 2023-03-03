@@ -7,9 +7,8 @@ function Redirect($url, $permanent = false)
 
 function IsLogged()
 {
-    if (isset($_SESSION['logged_in']) == false) {
+    if (isset($_SESSION['logged_in']) == false || $_SESSION['logged_in'] == false)
         return false;
-    }
     return true;
 }
 ?>
