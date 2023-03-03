@@ -4,9 +4,7 @@ session_start();
 ?>
 
 <?php
-if (IsLogged() == false) {
-    Redirect('http://medicina.ddns.net/medicina/page2.php', true);
-}
+//$_SESSION["favcolor"] = "yellow";
 ?>
 
 <!doctype html>
@@ -21,7 +19,7 @@ if (IsLogged() == false) {
 </head>
 
 <body>
-    <h1>INDEX</h1>
+    <h1>PAGE2</h1>
     <div class="container-fluid" id="header">
         <!-- <h1>Header</h1> -->
         <?php require_once("header.php") ?>
