@@ -5,7 +5,7 @@ session_start();
 
 <?php
 if (IsLogged() == false) {
-    Redirect('http://medicina.ddns.net/medicina/page2.php', true);
+    Redirect('http://medicina.ddns.net/page2.php', true);
 }
 ?>
 
