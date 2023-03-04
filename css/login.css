@@ -33,14 +33,6 @@ body {
 }
 
 .input-group-text {
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* stretch the background to cover the whole element */
-
-    /* 
-       still inline, but has block features
-       meaning height and width can be set
-    */
     display: inline-block;
     border-left: 0;
     pointer-events: none;

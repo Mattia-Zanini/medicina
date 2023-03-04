@@ -1,6 +1,9 @@
 <?php
 require_once("utils.php");
 session_start();
+
+// print_r($_SESSION);
+
 if (isset($_GET["page"]) == false)
     $page = "INDEX";
 else
