@@ -9,7 +9,7 @@ $db = $database->connect();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['codice']) && isset($_POST['nome']) && isset($_POST['cfu'])) {
         $activity = new Medicina($db);
-        $activity->UpdateActivity($_POST['codice'], $_POST['nome'], $_POST['cfu']);
+        $activity->AddActivity($_POST['codice'], $_POST['nome'], $_POST['cfu']);
     }
 }
 Redirect($baseURL . "?page=attivita");

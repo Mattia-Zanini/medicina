@@ -11,6 +11,18 @@ class Medicina extends BaseController
         $result = $this->conn->query($sql);
         $this->SendOutput($result, JSON_OK);
     }
+    function getActivity($codice) //prende tutte le attività formative
+    {
+        $sql = sprintf(
+            "SELECT p.codice, p.nome, p.CFU
+            FROM formativa_didattica f
+            RIGHT JOIN piano_di_studi p ON p.codice = f.didattica
+            WHERE f.didattica IS NULL AND p.codice = '%s';",
+            $codice
+        );
+        $result = $this->conn->query($sql);
+        $this->SendOutput($result, JSON_OK);
+    }
     function ReturnArchieveActivity() //prende tutte le attività formative, ma non le invia
     {
         $sql = "SELECT p.codice, p.nome, p.CFU
@@ -94,6 +106,29 @@ class Medicina extends BaseController
         $sql = sprintf(
             "DELETE FROM piano_di_studi 
             WHERE codice = '%s'",
+            $codice
+        );
+        $this->conn->query($sql);
+    }
+    function AddActivity($codice, $nome, $CFU)
+    {
+        $sql = sprintf(
+            "INSERT INTO piano_di_studi (codice, nome, cfu)
+            VALUES('%s', '%s', '%s')",
+            $codice,
+            $nome,
+            $CFU
+        );
+        $this->conn->query($sql);
+    }
+    function UpdateActivity($codice, $nome, $CFU)
+    {
+        $sql = sprintf(
+            "UPDATE piano_di_studi
+            SET nome = '%s', cfu = %d
+            WHERE codice = '%s'",
+            $nome,
+            $CFU,
             $codice
         );
         $this->conn->query($sql);
