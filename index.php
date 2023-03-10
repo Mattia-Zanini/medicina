@@ -4,13 +4,13 @@ session_start();
 
 // print_r($_SESSION);
 
-if (isset($_GET["page"]) == false)
-    $page = "INDEX";
-else
+if (isset($_GET["page"]) == false) {
+    Redirect($baseURL . "?page=home");
+} else
     $page = $_GET["page"];
 
 if (IsLogged() == false && $page != "login") {
-    Redirect('http://localhost/medicina?page=login');
+    Redirect($baseURL . "?page=login");
 }
 ?>
 
@@ -41,7 +41,6 @@ if (IsLogged() == false && $page != "login") {
             require_once("footer.php");
         ?>
     </div>
-    <?php require_once("foot.php"); ?>
 </body>
 
 </html>

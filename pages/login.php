@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="css/login.css">
+
 <div class="row">
     <div class="login-form col-lg-3">
         <h1 class="login-text login-title mt-3">Log In</h1>
-        <form class="my-4 mx-3" action="php/loginAPI.php" method="POST">
+        <form class="my-4 mx-3" action="api/loginAPI.php" method="POST">
             <div class="mb-3 col-11 ms-3">
                 <label for="inputEmail" class="form-label login-text">E-Mail</label>
                 <div class="input-group">
