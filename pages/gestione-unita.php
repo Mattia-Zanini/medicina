@@ -13,34 +13,30 @@ $array = json_decode(file_get_contents($url));
 </div>
 <div class="row mt-5">
     <div class="col-3 text-center add-form">
-        <h1>Aggiungi</h1>
+        <h1>Collega</h1>
         <div class="row">
-            <form class="mt-5" action="api/addActivity.php" method="POST">
-                <div class="mb-3 col-11 ms-3">
-                    <label for="inputCodice" class="form-label login-text">
-                        <h5>Codice</h5>
-                    </label>
-                    <div class="input-group">
-                        <input type="number" class="form-control test-input" id="inputCodice" name="codice">
-                    </div>
+            <form class="mt-5" action="api/addUnity.php" method="POST">
+                <div class="row">
+                    <h5>Attività Formativa</h5>
+                    <select id="selectActivity" class="selectActivity form-select mb-3" name="codice_a">
+                        <?php foreach ($array as $row): ?>
+                            <option value="<?php echo $row->codice; ?>">
+                                <?php echo "Codice: " . $row->codice . " " . $row->nome; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
-                <div class="mb-3 col-11 ms-3">
-                    <label for="inputNome" class="form-label login-text">
-                        <h5>Nome</h5>
-                    </label>
-                    <div class="input-group">
-                        <input type="text" class="form-control test-input" id="inputNome" name="nome">
-                    </div>
+                <div class="row mt-3">
+                    <h5>Unità Didattica</h5>
+                    <select id="selectUnity" class="selectUnity form-select mb-3" name="codice_u">
+                        <?php foreach ($array as $row): ?>
+                            <option value="<?php echo $row->codice; ?>">
+                                <?php echo "Codice: " . $row->codice . " " . $row->nome; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
-                <div class="mb-3 col-11 ms-3">
-                    <label for="inputCFU" class="form-label login-text">
-                        <h5>CFU</h5>
-                    </label>
-                    <div class="input-group">
-                        <input type="number" class="form-control test-input" id="inputCFU" name="cfu">
-                    </div>
-                </div>
-                <button class="btn btn-primary col-3 mt-2" type="submit">Aggiungi</button>
+                <button class="btn btn-primary col-3 mt-2" type="submit">Collega</button>
             </form>
         </div>
     </div>
@@ -50,9 +46,9 @@ $array = json_decode(file_get_contents($url));
             <form class="mt-5" action="api/updateActivity.php" method="POST">
                 <select id="selectActivity" class="selectActivity form-select mb-3" name="codice">
                     <?php foreach ($array as $row): ?>
-                    <option value="<?php echo $row->codice; ?>">
-                        <?php echo 'Codice: ' . $row->codice; ?>
-                    </option>
+                        <option value="<?php echo $row->codice; ?>">
+                            <?php echo 'Codice: ' . $row->codice; ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
                 <div class="mb-3 col-11 ms-3">
@@ -77,46 +73,46 @@ $array = json_decode(file_get_contents($url));
     </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function() {
-    StartUp();
+    $(document).ready(function () {
+        StartUp();
 
-    $('#selectActivity').change(function() {
-        //Use $option (with the "$") to see that the variable is a jQuery object
-        let $option = $(this).find('option:selected');
-        //Added with the EDIT
-        let value = $option.val(); //to get content of "value" attrib
-        let text = $option.text(); //to get <option>Text</option> content
-        let id = $option.attr("value");
+        $('#selectActivity').change(function () {
+            //Use $option (with the "$") to see that the variable is a jQuery object
+            let $option = $(this).find('option:selected');
+            //Added with the EDIT
+            let value = $option.val(); //to get content of "value" attrib
+            let text = $option.text(); //to get <option>Text</option> content
+            let id = $option.attr("value");
 
-        //console.log(text);
-        //console.log(id);
-        GetActivityData(id);
-    });
-
-    function StartUp() {
-        let value = $("#selectActivity").val();
-        console.log("Valore: " + value);
-        GetActivityData(value);
-    }
-
-    function GetActivityData(codice) {
-        $.ajax({
-            url: "/medicina/api/getActivity.php",
-            type: "POST",
-            data: {
-                "codice": codice,
-            },
-            success: function(data) {
-                console.log(data);
-                RenderInfo(data[0]);
-            },
-            error: function(request, status, error) {}
+            //console.log(text);
+            //console.log(id);
+            GetActivityData(id);
         });
-    }
 
-    function RenderInfo(info) {
-        $("#inputNomeModify").val(info.nome);
-        $("#inputCFUModify").val(info.CFU);
-    }
-});
+        function StartUp() {
+            let value = $("#selectActivity").val();
+            console.log("Valore: " + value);
+            GetActivityData(value);
+        }
+
+        function GetActivityData(codice) {
+            $.ajax({
+                url: "/medicina/api/getActivity.php",
+                type: "POST",
+                data: {
+                    "codice": codice,
+                },
+                success: function (data) {
+                    console.log(data);
+                    RenderInfo(data[0]);
+                },
+                error: function (request, status, error) { }
+            });
+        }
+
+        function RenderInfo(info) {
+            $("#inputNomeModify").val(info.nome);
+            $("#inputCFUModify").val(info.CFU);
+        }
+    });
 </script>

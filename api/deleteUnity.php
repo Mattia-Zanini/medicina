@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $db = $database->connect();
 
         $unity = new Medicina($db);
-        $unity->deleteActivity($_POST['codice']);
+        $unity->deleteUnity($_POST['codice']);
         Redirect($baseURL . "?page=unita");
     }
 }

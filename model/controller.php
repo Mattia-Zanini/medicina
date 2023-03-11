@@ -133,5 +133,15 @@ class Medicina extends BaseController
         );
         $this->conn->query($sql);
     }
+    function LinkUnity($attivita, $unita)
+    {
+        $sql = sprintf(
+            "INSERT INTO formativa_didattica (formativa, didattica)
+            VALUES('%s', '%s')",
+            $attivita,
+            $unita
+        );
+        $this->conn->query($sql);
+    }
 }
 ?>
