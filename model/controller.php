@@ -42,6 +42,26 @@ class Medicina extends BaseController
         $result = $this->conn->query($sql);
         $this->SendOutput($result, JSON_OK);
     }
+    function getUnities()
+    {
+        $sql = "SELECT p.codice, p.nome, p.CFU
+            FROM formativa_didattica f
+            LEFT JOIN piano_di_studi p ON p.codice = f.didattica
+            WHERE 1=1;";
+        $result = $this->conn->query($sql);
+        $this->SendOutput($result, JSON_OK);
+    }
+    function getSingleUnity($codice_u)
+    {
+        $sql = sprintf("SELECT p.codice, p.nome, p.CFU
+            FROM formativa_didattica f
+            LEFT JOIN piano_di_studi p ON p.codice = f.didattica
+            WHERE f.didattica = '%s';",
+            $codice_u
+        );
+        $result = $this->conn->query($sql);
+        $this->SendOutput($result, JSON_OK);
+    }
     function deleteActivity($codice)
     {
         $sql = sprintf(
@@ -139,6 +159,14 @@ class Medicina extends BaseController
             "INSERT INTO formativa_didattica (formativa, didattica)
             VALUES('%s', '%s')",
             $attivita,
+            $unita
+        );
+        $this->conn->query($sql);
+    }
+    function UnLinkUnity($unita)
+    {
+        $sql = sprintf(
+            "DELETE FROM formativa_didattica WHERE didattica = '%s';",
             $unita
         );
         $this->conn->query($sql);

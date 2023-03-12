@@ -17,6 +17,7 @@ $array = json_decode(file_get_contents($url));
                     <th scope="col">Nome Attività</th>
                     <th scope="col">Codice Unità</th>
                     <th scope="col">Nome Unità</th>
+                    <th scope="col">Dissocia</th>
                     <th scope="col">Elimina</th>
                 </tr>
             </thead>
@@ -41,11 +42,19 @@ $array = json_decode(file_get_contents($url));
                             <?php echo $array[$i]->u_nome; ?>
                         </td>
                         <td>
-                            <form action="http://localhost/medicina/api/deleteUnity.php" method="post">
+                            <form action="api/unlinkUnity.php" method="post">
+                                <input type="hidden" name="codice_a" value="<?php echo $array[$i]->a_codice; ?>">
+                                <button class="btn btn-outline-dark btn-unlink" name="codice_u"
+                                    value="<?php echo $array[$i]->u_codice; ?>">
+                                    <img src="assets/img/weakness.png" alt="unlink" width="20" height="20" class="">
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="api/deleteUnity.php" method="post">
                                 <button class="btn btn-outline-dark btn-delete" name="codice"
                                     value="<?php echo $array[$i]->u_codice; ?>">
-                                    <img src="http://localhost/medicina/assets/img/trash.png" alt="trash" width="20"
-                                        height="20" class="">
+                                    <img src="assets/img/trash.png" alt="trash" width="20" height="20" class="">
                                 </button>
                             </form>
                         </td>
@@ -58,6 +67,7 @@ $array = json_decode(file_get_contents($url));
                     <th scope="col">Nome Attività</th>
                     <th scope="col">Codice Unità</th>
                     <th scope="col">Nome Unità</th>
+                    <th scope="col">Dissocia</th>
                     <th scope="col">Elimina</th>
                 </tr>
             </tfooter>

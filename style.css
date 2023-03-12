@@ -18,3 +18,16 @@ input[type=number] {
 .btn-delete:hover {
     background-color: #c00000;
 }
+
+.btn-unlink:hover {
+    background-color: #145acb;
+}
+
+.add-form {
+    margin-left: 20vw;
+}
+
+.selectActivity {
+    width: 21.6vw;
+    margin-left: 1vw;
+}

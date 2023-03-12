@@ -1,7 +1,9 @@
 <?php
 $url = 'http://localhost/medicina/api/getArchiveActivity.php';
 $array = json_decode(file_get_contents($url));
-//print_r($array);
+
+$url = 'http://localhost/medicina/api/getUnities.php';
+$unities = json_decode(file_get_contents($url));
 ?>
 
 <link rel="stylesheet" href="css/gestione-att.css">
@@ -43,9 +45,9 @@ $array = json_decode(file_get_contents($url));
     <div class="col-3 offset-1 text-center modify-form">
         <h1>Modifica</h1>
         <div class="row">
-            <form class="mt-5" action="api/updateActivity.php" method="POST">
-                <select id="selectActivity" class="selectActivity form-select mb-3" name="codice">
-                    <?php foreach ($array as $row): ?>
+            <form class="mt-5" action="api/updateUnity.php" method="POST">
+                <select id="selectSingleUnity" class="selectActivity form-select mb-3" name="codice">
+                    <?php foreach ($unities as $row): ?>
                         <option value="<?php echo $row->codice; ?>">
                             <?php echo 'Codice: ' . $row->codice; ?>
                         </option>
@@ -76,7 +78,7 @@ $array = json_decode(file_get_contents($url));
     $(document).ready(function () {
         StartUp();
 
-        $('#selectActivity').change(function () {
+        $('#selectSingleUnity').change(function () {
             //Use $option (with the "$") to see that the variable is a jQuery object
             let $option = $(this).find('option:selected');
             //Added with the EDIT
@@ -86,21 +88,21 @@ $array = json_decode(file_get_contents($url));
 
             //console.log(text);
             //console.log(id);
-            GetActivityData(id);
+            GetUnityData(id);
         });
 
         function StartUp() {
-            let value = $("#selectActivity").val();
+            let value = $("#selectSingleUnity").val();
             console.log("Valore: " + value);
-            GetActivityData(value);
+            GetUnityData(value);
         }
 
-        function GetActivityData(codice) {
+        function GetUnityData(codice) {
             $.ajax({
-                url: "/medicina/api/getActivity.php",
+                url: "/medicina/api/getSingleUnity.php",
                 type: "POST",
                 data: {
-                    "codice": codice,
+                    "codice_u": codice,
                 },
                 success: function (data) {
                     console.log(data);
